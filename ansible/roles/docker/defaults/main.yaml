@@ -1,0 +1,18 @@
+docker_binaries:
+- docker
+- docker-compose
+
+docker_group: docker
+
+docker_users:
+- user_id: vagrant
+  user_shell: /bin/bash
+
+docker_handler_list:
+- start docker
+- version docker-compose
+
+
+docker_url_gpg_key: https://download.docker.com/linux/ubuntu/gpg
+docker_file_gpg_key: /usr/share/keyrings/docker-archive-keyring.gpg
+docker_apt_repo: https://download.docker.com/linux/ubuntu

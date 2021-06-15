@@ -1,0 +1,6 @@
+---
+- name: Install Binaries
+  import_tasks: install.yaml
+
+- name: Apply RBAC
+  import_tasks: rbac.yaml

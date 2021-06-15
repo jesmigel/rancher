@@ -1,0 +1,11 @@
+---
+- name: Install Docker binaries
+  include_role:
+    name: common
+    tasks_from: apt.yaml
+    apply:
+      tags:
+        - apt_install
+  vars:
+    binaries: "{{ docker_binaries }}"
+    handler_list: "{{ docker_handler_list }}"

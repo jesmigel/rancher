@@ -1,0 +1,11 @@
+---
+- name: Append docker group to list of users
+  ansible.builtin.user:
+    name: "{{ item.user_id }}"
+    shell: "{{ item.user_shell }}"
+    groups: "{{ docker_group }}"
+    append: yes
+  loop: "{{  docker_users  }}"
+
+- name: reset ssh connection to refresh group
+  meta: reset_connection

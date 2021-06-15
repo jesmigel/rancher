@@ -1,0 +1,15 @@
+---
+- name: Add the Docker GPG key
+  ansible.builtin.apt_key:
+    url: "{{ docker_url_gpg_key }}"
+    keyring: "{{ docker_file_gpg_key }}"
+    state: present
+
+# - name: Add the official HashiCorp Linux repository.
+#   ansible.builtin.shell:
+#     cmd: apt-add-repository "deb [arch=amd64] https://apt.releases.hashicorp.com $(lsb_release -cs) main"
+
+- name: Add the official Docker Linux repository.
+  ansible.builtin.apt_repository:
+    repo: "deb [arch=amd64 signed-by={{ docker_file_gpg_key }}] {{ docker_apt_repo }} {{ ansible_facts.distribution_release }} main"
+    state: present
