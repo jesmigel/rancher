@@ -1,0 +1,10 @@
+---
+- name: Start services
+  community.docker.docker_compose:
+    project_src: "{{ rancher_path_project }}"
+  register: output
+
+- name: "[ASSERT] Start services"
+  ansible.builtin.assert:
+    that:
+      - "output.services.rancher.compose_rancher_1.state.running"

@@ -1,0 +1,32 @@
+---
+# Create Directory
+- name: Create docker-compose directory
+  ansible.builtin.file:
+    path: "{{ rancher_path_project }}"
+    state: directory
+    owner: vagrant
+    group: vagrant
+    mode: '0775'
+  tags:
+  - prerequisites
+
+# Create Template
+- name: Generate docker-compose from template
+  ansible.builtin.template:
+    src: "{{ rancher_compose_template }}"
+    dest: "{{ rancher_path_project }}/docker-compose.yaml"
+    owner: vagrant
+    group: vagrant
+    mode: '0644'
+  tags:
+  - prerequisites
+
+# Pull Images
+- name: Pull rancher docker images
+  community.docker.docker_compose:
+    project_src: "{{ rancher_path_project }}"
+    pull: yes
+    stopped: yes
+  register: output
+  tags:
+  - prerequisites

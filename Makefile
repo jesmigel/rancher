@@ -27,6 +27,7 @@ up:
 venv_init:
 	$(call venv_exec,.venv,pip install -r requirements.txt)
 	$(call venv_exec,.venv,pip install --upgrade pip)
+	$(call venv_exec,.venv,ansible-galaxy collection install community.docker )
 
 _KUBECONFIG=.ignore.admin.conf
 _KUBECONFIG_LOCAL=./$(_KUBECONFIG)

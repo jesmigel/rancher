@@ -1,0 +1,11 @@
+version: "{{ rancher_docker_config.COMPOSE_VERSION|default(3, true) }}"
+
+services:
+
+  rancher:
+    image: {{ rancher_docker_config.IMAGE }}:{{ rancher_docker_config.TAG|default("latest", true) }}
+    ports:
+{% for portmap in rancher_docker_config.PORTS %}
+    - {{ portmap }}
+{% endfor %}
+    privileged: {{ rancher_docker_config.PRIVILEGED|default(false, true) }}
