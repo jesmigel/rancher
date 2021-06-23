@@ -9,3 +9,8 @@ services:
     - {{ portmap }}
 {% endfor %}
     privileged: {{ rancher_docker_config.PRIVILEGED|default(false, true) }}
+    volumes:
+{% for volmap in rancher_docker_config.VOLUMES %}
+    - {{ volmap }}
+{% endfor %}
+    restart: {{ rancher_docker_config.RESTART }}

@@ -2,10 +2,18 @@ rancher_path_project: /home/vagrant/compose
 rancher_path_volume: /home/vagrant/compose/vol
 rancher_compose_template: docker-compose.yaml.jinja2
 
+rancher_paths:
+- "{{ rancher_path_project }}"
+- "{{ rancher_path_project }}/vol"
+- "{{ rancher_path_project }}/vol/rancher"
+
 rancher_docker_config:
   COMPOSE_VERSION: 3
   IMAGE: rancher/rancher
   PORTS:
   - 80:80
   - 443:443
+  VOLUMES:
+  - ./vol/rancher/data:/var/lib/rancher:Z
   PRIVILEGED: true
+  RESTART: always
